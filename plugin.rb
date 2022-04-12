@@ -187,7 +187,6 @@ after_initialize do
           :qa_vote_count,
           :solution,
           :solution_actor_user_id,
-          :qa_enabled,
           :qa_user_voted_direction,
           :qa_has_votes,
           :comments,
