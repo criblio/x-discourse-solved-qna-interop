@@ -206,7 +206,7 @@ after_initialize do
   end
 
   TopicView.apply_custom_default_scope do |scope, topic_view|
-    if topic_view.topic.qa_enabled &&
+    if topic_view.topic.is_qa? &&
       !topic_view.instance_variable_get(:@replies_to_post_number) &&
       !topic_view.instance_variable_get(:@post_ids)
 
