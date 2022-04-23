@@ -2,7 +2,7 @@
 
 # name: x-discourse-solved-qna-interop
 # about: Extend Discourse Solved & Question n Answer plugins and make them work together as specced.
-# version: 0.0.1
+# version: 0.0.2
 # url: https://github.com/paviliondev/x-discourse-solved-qna-interop
 # authors: merefield
 
@@ -39,8 +39,6 @@ after_initialize do
   end
 
   module ::DiscourseSolved
-
-    AUTO_CLOSE_TOPIC_TIMER_CUSTOM_FIELD = "solved_auto_close_topic_timer_id".freeze
 
     def self.accept_answer!(post, acting_user, topic: nil)
       topic ||= post.topic
