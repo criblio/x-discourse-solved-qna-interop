@@ -2,7 +2,7 @@
 
 # name: x-discourse-solved-qna-interop
 # about: Extend Discourse Solved & Question n Answer plugins and make them work together as specced.
-# version: 0.0.2
+# version: 0.0.3
 # url: https://github.com/paviliondev/x-discourse-solved-qna-interop
 # authors: merefield
 
@@ -223,5 +223,8 @@ after_initialize do
 
   class ::PostSerializer
     include QuestionAnswer::PostSerializerExtension
+  end
+
+  class WebHookPostSerializer < PostSerializer
   end
 end
