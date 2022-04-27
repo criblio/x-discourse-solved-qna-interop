@@ -2,7 +2,7 @@
 
 # name: x-discourse-solved-qna-interop
 # about: Extend Discourse Solved & Question n Answer plugins and make them work together as specced.
-# version: 0.0.3
+# version: 0.0.4
 # url: https://github.com/paviliondev/x-discourse-solved-qna-interop
 # authors: merefield
 
@@ -178,29 +178,29 @@ after_initialize do
     end
   end
 
-  module QuestionAnswer
-    module PostSerializerExtension
-      def self.included(base)
-        base.attributes(
-          :qa_vote_count,
-          :solution,
-          :solution_actor_user_id,
-          :qa_user_voted_direction,
-          :qa_has_votes,
-          :comments,
-          :comments_count,
-        )
-      end
+  # module QuestionAnswer
+  #   module AdditionalPostSerializerExtension
+  #     # def self.included(base)
+  #     #   base.attributes(
+  #     #     :qa_vote_count,
+  #     #     :solution,
+  #     #     :solution_actor_user_id,
+  #     #     :qa_user_voted_direction,
+  #     #     :qa_has_votes,
+  #     #     :comments,
+  #     #     :comments_count,
+  #     #   )
+  #     # end
   
-      def solution
-       object.solution
-      end
+  #     def solution
+  #      object.solution
+  #     end
 
-      def solution_actor_user_id
-        object.solution_actor_user_id
-      end
-    end
-  end
+  #     def solution_actor_user_id
+  #       object.solution_actor_user_id
+  #     end
+  #   end
+  # end
 
   TopicView.apply_custom_default_scope do |scope, topic_view|
     if topic_view.topic.is_qa? &&
@@ -221,10 +221,11 @@ after_initialize do
     end
   end
 
-  class ::PostSerializer
-    include QuestionAnswer::PostSerializerExtension
-  end
+  # class ::PostSerializer
+  #   include QuestionAnswer::AdditionalPostSerializerExtension
+  # end
 
-  class WebHookPostSerializer < PostSerializer
-  end
+  add_to_serializer(:post,:solution) {object.solution}
+  add_to_serializer(:post,:solution_actor_user_id) {object.solution_actor_user_id}
+
 end
